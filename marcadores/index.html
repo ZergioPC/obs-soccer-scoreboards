@@ -2,45 +2,55 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./estilos.css">
     <link rel="stylesheet" href="./css/marcador_01.css">
 </head>
 <body>
+    <header>
+        <button id="controlHide">Ocultar</button>
+        <button id="controlShow">Mostrar</button>
+    </header>
     <main>
-        <div class="scoreboard-timer">
-            <p id="score-timer">00:00</p>
-        </div>
-        <div class="scoreboard-team-local">
-            <p id="score-Local-name">AAA</p>
-            <p id="score-Local-num">00</p>
-        </div>
-        <div class="scoreboard-team-visit">
-            <p id="score-Visit-name">BBB</p>
-            <p id="score-Visit-num">00</p>
-        </div>
-        <div class="scoreboard-extra">
-            <p id="score-extraTime">+   00</p>
-        </div>
-        <div class="scoreboard-chPlayer">
-            <p id="score-playerOut">PepitoPeraltaPerez</p>
-            <p id="score-playerIn">PepitoPeraltaPerez</p>
+        <div class="scoreboard">
+            <div class="scoreboard-time">
+                <div class="scoreboard-time-counter">
+                    <p id="score-timer">00:00</p>
+                </div>
+                <div class="scoreboard-time-extra">
+                    <p id="score-extraTime">+   00</p>
+                </div>
+            </div>
+            <div class="scoreboard-team-local">
+                <p id="score-Local-name">AAA</p>
+                <p id="score-Local-num">00</p>
+            </div>
+            <div class="scoreboard-team-visit">
+                <p id="score-Visit-num">00</p>
+                <p id="score-Visit-name">BBB</p>
+            </div>
+            <div class="scoreboard-chPlayer">
+                <p id="score-playerTeam">AAA</p>
+                <p id="score-playerOut">PepitoPeraltaPerez</p>
+                <p id="score-playerIn">PepitoPeraltaPerez</p>
+            </div>
         </div>
     </main>
     <section>
         <div class="data-goal">
             <p>Control del Marcador</p>
             <div>
-                <button id="golAddTeamA"></button>
+                <button id="golAddTeamA">+</button>
                 <span id="gol-TeamA">Equipo 1</span>
-                <button id="golLessTeamA"></button>
+                <button id="golLessTeamA">-</button>
             </div>
             <div>
-                <button id="golAddTeamB"></button>
+                <button id="golAddTeamB">+</button>
                 <span id="gol-TeamB">Equipo 2</span>
-                <button id="golLessTeamB"></button>
+                <button id="golLessTeamB">-</button>
             </div>
         </div>
         <div class="data-teams">
-            <p>Nombres</p>
+            <p>Nombres de los Equipos</p>
             <div>
                 <p>Local:</p>
                 <input type="text" name="local-team" id="txt-local-team" placeholder="Team A">
@@ -52,38 +62,36 @@
             <button id="setTeamsNames">Confirmar</button>
         </div>
         <div class="data-score">
-            <p>Marcador inicial</p>
+            <p>Marcador</p>
             <div>
-                <div>
-                    <p>Local</p>
-                    <input type="number" value="0" id="score-init-local">
-                </div>
-                <div>
-                    <p>Visitante</p>
-                    <input type="number" value="0" id="score-init-visit">
-                </div>
+                <p>Local</p>
+                <input type="number" value="0" id="score-init-local">
+            </div>
+            <div>
+                <p>Visitante</p>
+                <input type="number" value="0" id="score-init-visit">
             </div>
             <button id="setTeamsScores">Confirmar</button>
         </div>
-        <div class="dataTime">
+        <div class="data-time">
             <p>Tiempo de Inicio</p>
             <div><input type="number" value="00">:<input type="number" value="00"></div>
             <button>Confirmar</button>
         </div>
-        <div class="extra-time">
+        <div class="data-extraTime">
             <p>Tiempo Extra</p>
             <input type="number" value="0">
             <button id="extraTime">Agregar</button>
         </div>
-        <div class="change-player">
+        <div class="data-changePlayer">
             <p>Cambio de Jugador</p>
             <div>
                 <input type="text" placeholder="sale" id="change-player-out">
                 <input type="text" placeholder="entra" id="change-player-in">
             </div>
             <div>
-                <button id="ch-player-TA"></button>
-                <button id="ch-player-TB"></button>
+                <button id="ch-player-TA">Local</button>
+                <button id="ch-player-TB">Visitante</button>
             </div>
         </div>
     </section>
