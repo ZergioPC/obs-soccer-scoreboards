@@ -9,6 +9,7 @@
     <header>
         <button id="controlHide">Ocultar</button>
         <button id="controlShow">Mostrar</button>
+        <span id="contolLog">Mensajes</span>
     </header>
     <main>
         <div class="scoreboard">
@@ -40,12 +41,12 @@
             <p>Control del Marcador</p>
             <div>
                 <button id="golAddTeamA">+</button>
-                <span id="gol-TeamA">Equipo 1</span>
+                <span id="golTeamA">Equipo 1</span>
                 <button id="golLessTeamA">-</button>
             </div>
             <div>
                 <button id="golAddTeamB">+</button>
-                <span id="gol-TeamB">Equipo 2</span>
+                <span id="golTeamB">Equipo 2</span>
                 <button id="golLessTeamB">-</button>
             </div>
         </div>
@@ -62,7 +63,7 @@
             <button id="setTeamsNames">Confirmar</button>
         </div>
         <div class="data-score">
-            <p>Marcador</p>
+            <p>Marcador Inicial</p>
             <div>
                 <p>Local</p>
                 <input type="number" value="0" id="score-init-local">
@@ -75,13 +76,13 @@
         </div>
         <div class="data-time">
             <p>Tiempo de Inicio</p>
-            <div><input type="number" value="00">:<input type="number" value="00"></div>
-            <button>Confirmar</button>
+            <div><input type="number" value="00" id="setTimerMin">:<input type="number" value="00" id="setTimerSeg"></div>
+            <button id="setTimer">Confirmar</button>
         </div>
         <div class="data-extraTime">
             <p>Tiempo Extra</p>
-            <input type="number" value="0">
-            <button id="extraTime">Agregar</button>
+            <input type="number" value="0" id="data-extraTime">
+            <button id="setExtraTime">Agregar</button>
         </div>
         <div class="data-changePlayer">
             <p>Cambio de Jugador</p>
@@ -95,6 +96,7 @@
             </div>
         </div>
     </section>
-    <script src="./main.js" type="module"></script>
+    <script src="./main.js"></script>
+    <script src="./js/marcador_01.js"></script>
 </body>
 </html>
