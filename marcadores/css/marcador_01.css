@@ -1,7 +1,16 @@
+:root{
+    --color-gray: #dbdbdb;
+    --color-blue-light: #c9a8ff;
+    --color-blue-dark: #44356b;
+    --color-whithe: #ffffff;
+}
+
 main{
+    display: flex;
+    padding: 50px 0;
+    justify-content: center;
     border: solid 2px black;
     box-sizing: border-box;
-    padding: 40px;
     width: 550px;
     margin-bottom: 5px  ;
 }
@@ -11,9 +20,11 @@ main{
 
 .scoreboard{
     display: grid;
-    grid-template: 1fr 1fr 3fr / repeat(6,1fr);
+    width: 300px;
+    grid-template: 24px 23px 3fr / repeat(6,1fr);
 }
 
+/* TIEMPO */
 .scoreboard-time{
     position: relative;
     grid-row: 1/2;
@@ -27,45 +38,109 @@ main{
     width: 100%;
 }
 
+.scoreboard-time-counter > p,.scoreboard-time-extra > p{
+    margin: 0;
+}
+
 .scoreboard-time-counter{
     z-index: 5;
-    right: 20px;
+    right: 30px;
 }
 
 .scoreboard-time-extra{
     z-index: 4;
-    left: 20px;
+    left: 30px;
 }
 
 .scoreboard-time-counter > p,.scoreboard-time-extra > p{
     display: inline-block;
+    padding: 3px 20px 0;
 }
 
 .scoreboard-time-counter > p {
     background-color: antiquewhite;
+    border-radius: 20px 20px 0 0;
 }
 
 .scoreboard-time-extra > p {
     background-color: aquamarine;
+    border-radius: 0px 20px 0 0;
+}
+
+
+/* NOMBRES EQUIPOS*/
+
+
+.scoreboard-team-local, .scoreboard-team-visit {
+    background-color: var(--color-blue-light);
 }
 
 .scoreboard-team-local > p, .scoreboard-team-visit > p {
     display: inline-block;
+    margin: 0;
 }
 
 .scoreboard-team-local{
     grid-row: 2/3;
     grid-column: 1/4;
     text-align: right;
+    border-radius: 0 0 0 20px;
+}
+
+.scoreboard-team-local > p:first-child, .scoreboard-team-visit > p:last-child {
+    font-weight: bold;
+    margin: 0 10px; 
 }
 
 .scoreboard-team-visit{
     grid-row: 2/3;
     grid-column: 4/7;
     text-align: left;
+    border-radius: 0 0 20px 0;
 }
+
+/* GOLES */
+
+
+.scoreboard-team-local > p:last-child, .scoreboard-team-visit > p:first-child {
+    width: 20px;
+    text-align: center;
+    background-color: var(--color-gray);
+}
+
+#score-Local-num {
+    padding: 0 5px 0 20px;
+    border-radius: 0 0 0 20px;
+}
+
+#score-Visit-num {
+    padding: 0 20px 0 5px;
+    border-radius: 0 0 20px 0;
+}
+
+
+/* CAMBIO DE JUGADOR */
 
 .scoreboard-chPlayer{
     grid-row: 3/4;
     grid-column: 2/6;
+}
+
+.scoreboard-chPlayer > p {
+    display: inline-block;
+    margin: 5px;
+    padding: 3px 0 3px 15px;
+    border-radius: 0 20px 0 20px;
+}
+
+.scoreboard-chPlayer > p:first-child{
+    width: 100px;
+    font-weight: bold;
+    color: var(--color-whithe);
+    background-color: var(--color-blue-dark);
+}
+
+.scoreboard-chPlayer > p:nth-child(2), .scoreboard-chPlayer > p:nth-child(3){
+    width: 200px;
+    background-color: var(--color-whithe);
 }

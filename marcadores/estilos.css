@@ -1,3 +1,7 @@
+main {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 section{
     display: grid;
     grid-template-rows: repeat(2,100px);
@@ -6,6 +10,8 @@ section{
     grid-column-gap: 15px;
     width: 90vw;
     font-size: 15px;
+    background-color: white;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 section > div {
