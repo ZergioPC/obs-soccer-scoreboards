@@ -1,7 +1,7 @@
 :root{
-    --color-gray: #dbdbdb;
-    --color-blue-light: #c9a8ff;
-    --color-blue-dark: #44356b;
+    --color-gray: #818181;
+    --color-blue-light: #56adff;
+    --color-blue-dark: #098ac5;
     --color-whithe: #ffffff;
 }
 
@@ -9,9 +9,10 @@ main{
     display: flex;
     padding: 50px 0;
     justify-content: center;
-    border: solid 2px black;
+    border: solid 2px white;
     box-sizing: border-box;
     width: 550px;
+    height: 280px;
     margin-bottom: 5px  ;
 }
 
@@ -22,9 +23,13 @@ main{
     display: grid;
     width: 300px;
     grid-template: 24px 23px 3fr / repeat(6,1fr);
+    transition-duration: 500ms;
 }
 
+
 /* TIEMPO */
+
+
 .scoreboard-time{
     position: relative;
     grid-row: 1/2;
@@ -36,6 +41,7 @@ main{
     bottom: 0;
     text-align: center;
     width: 100%;
+    transition-duration: 500ms;
 }
 
 .scoreboard-time-counter > p,.scoreboard-time-extra > p{
@@ -44,27 +50,33 @@ main{
 
 .scoreboard-time-counter{
     z-index: 5;
-    right: 30px;
+}
+
+.scoreboard-time-counter-displace{
+    transform: translateX(-30px);
 }
 
 .scoreboard-time-extra{
     z-index: 4;
-    left: 30px;
+}
+
+.scoreboard-time-extra-displace{
+    transform: translateX(30px);
 }
 
 .scoreboard-time-counter > p,.scoreboard-time-extra > p{
     display: inline-block;
     padding: 3px 20px 0;
-}
-
-.scoreboard-time-counter > p {
-    background-color: antiquewhite;
     border-radius: 20px 20px 0 0;
 }
 
+.scoreboard-time-counter > p {
+    background-color: var(--color-whithe);
+}
+
 .scoreboard-time-extra > p {
-    background-color: aquamarine;
-    border-radius: 0px 20px 0 0;
+    background-color: var(--color-blue-dark);
+    color: var(--color-whithe);
 }
 
 
@@ -106,6 +118,7 @@ main{
     width: 20px;
     text-align: center;
     background-color: var(--color-gray);
+    color: var(--color-whithe);
 }
 
 #score-Local-num {
@@ -122,15 +135,18 @@ main{
 /* CAMBIO DE JUGADOR */
 
 .scoreboard-chPlayer{
+    position: relative;
     grid-row: 3/4;
     grid-column: 2/6;
 }
 
 .scoreboard-chPlayer > p {
+    position: absolute;
     display: inline-block;
     margin: 5px;
     padding: 3px 0 3px 15px;
     border-radius: 0 20px 0 20px;
+    transition-duration: 500ms;
 }
 
 .scoreboard-chPlayer > p:first-child{
@@ -143,4 +159,70 @@ main{
 .scoreboard-chPlayer > p:nth-child(2), .scoreboard-chPlayer > p:nth-child(3){
     width: 200px;
     background-color: var(--color-whithe);
+}
+
+.scoreboard-chPlayer > p:nth-child(2)::after{
+    content: '  ⬇️';
+    filter: hue-rotate(160deg);
+}
+
+.scoreboard-chPlayer > p:nth-child(3)::after{
+    content: '  ⬆️';
+}
+
+
+/* FX */
+
+
+.fx-barrido-h-full{
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.fx-barrido-h-empty{
+    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+}
+
+.chPlayer-in{
+    transform: translateX(10px) translateY(35px);
+}
+
+.chPlayer-out{
+    transform: translateX(20px) translateY(70px);
+}
+
+
+
+/* ANIMACIONES */
+.key-shine{
+    animation-name: shine;
+    animation-duration: 500ms;
+}
+
+.key-dark{
+    animation-name: dark;
+    animation-duration: 500ms;
+}
+
+@keyframes shine {
+    0%{
+        filter: blur(0px) brightness(100%) saturate(50%) contrast(100%);
+    }
+    50%{
+        filter: blur(3px) brightness(156%) saturate(0%) contrast(201%);
+    }
+    100%{
+        filter: blur(0px) brightness(100%) saturate(50%) contrast(100%);
+    }
+}
+
+@keyframes dark {
+    0%{
+        filter: blur(0px) brightness(100%) saturate(50%) contrast(100%);
+    }
+    50%{
+        filter: blur(3px) brightness(56%) saturate(0%) contrast(201%);
+    }
+    100%{
+        filter: blur(0px) brightness(100%) saturate(50%) contrast(100%);
+    }
 }

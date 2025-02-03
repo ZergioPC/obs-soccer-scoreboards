@@ -1,4 +1,6 @@
 //MARK:VAR DOM
+import scoreScript from './js/marcador_01.js'
+
 /* Marcador */
 const $btnStart = document.getElementById('controlShow');
 const $btnStop = document.getElementById('controlHide');
@@ -60,7 +62,7 @@ class Tiempo {
     }
 
     startTime(callback){
-        this.interval = setInterval(()=>{callback()},100);
+        this.interval = setInterval(()=>{callback()},1000);
     }
 
     stopTime(){
@@ -75,30 +77,49 @@ const sc_equipos = ["AAA","BBB"];
 const sc_timeGlob = [0,0]
 const sc_timeInit = [0,0];
 
-let countdown = 45;
+
 
 const sc_cambio = {
     entra: 'Pepito Perez Peralta',
     sale: 'Pepito Perez Peralta'
 }
 
+scoreScript.scoreInit([
+    document.querySelector('.scoreboard'),
+    $changeTeam,
+    $changeIn,
+    $changeOut
+]);
+
 const Temporizador = new Tiempo();
 
 //MARK:Funciones
 function cambioDeJugador(){
-    //Estilos de cambiar de jugador
+    $btnChangeLocal.disabled = true;
+    $btnChangeVisit.disabled = true;
+
+    scoreScript.changePlayer($changeTeam,$changeIn,$changeOut);
+    
+    setTimeout(()=>{
+        $btnChangeLocal.disabled = false;
+        $btnChangeVisit.disabled = false;
+    },11000)
 }
 
 function showExtraTime(){
-    //Estilo de mostrar tiempo extra
+    scoreScript.extraTime(
+        document.querySelector('.scoreboard-time-counter'),
+        document.querySelector('.scoreboard-time-extra'),
+        true
+    )
 }
 
 function golEffect(div){
-    //Estilo del gol
+    scoreScript.goal(div);
 }
 
 function noGolEffect(div){
-    //Estilo de gol anulado
+    scoreScript.goalNo(div);
 }
 
 function timeChange(){    
@@ -106,13 +127,7 @@ function timeChange(){
         sc_timeGlob[1]++;
     }else{
         sc_timeGlob[1] = 0;
-        sc_timeGlob[0]++;
-        countdown--;
-        
-    }
-
-    if(countdown === 0){
-        showExtraTime();
+        sc_timeGlob[0]++;       
     }
     
     function auxDraw(num){
@@ -139,7 +154,7 @@ function equipoChange(name,inner){
 /* Tiempo */
 $btnStart.addEventListener('click',()=>{
     $btnStart.disabled = true;
-    $btnStop.disabled = false;
+    setTimeout(()=>{$btnStop.disabled = false},2000);
     
     $btnGoalLocal.disabled = false;
     $btnGoalVisit.disabled = false;
@@ -159,17 +174,19 @@ $btnStart.addEventListener('click',()=>{
     $boardTimer.innerText = '00:00';
     sc_timeGlob[0] = sc_timeInit[0];
     sc_timeGlob[1] = sc_timeInit[1];
+
+    scoreScript.scoreShowHide(document.querySelector('.scoreboard'));
     
     Temporizador.startTime(function(){
         timeChange()
     });
 
-    $controlLog.innerText = "Comienza el juego"
+    $controlLog.innerText = "Comienza el juego";
 });
 
 $btnStop.addEventListener('click',()=>{
     $btnStop.disabled = true;
-    $btnStart.disabled = false;
+    setTimeout(()=>{$btnStart.disabled = false},2000);
 
     $btnGoalLocal.disabled = true;
     $btnGoalVisit.disabled = true;
@@ -184,14 +201,21 @@ $btnStop.addEventListener('click',()=>{
     $btnSetTimer.disabled = false
 
     Temporizador.stopTime();
+    
+    scoreScript.extraTime(
+        document.querySelector('.scoreboard-time-counter'),
+        document.querySelector('.scoreboard-time-extra'),
+        false
+    )
     $controlLog.innerText = 'Tiempo detenido';
-    });
+    scoreScript.scoreShowHide(document.querySelector('.scoreboard'));
+});
 
 $btnSetTimer.addEventListener('click',()=>{
     sc_timeInit[0] = parseInt($txtTimerMin.value);
     sc_timeInit[1] = parseInt($txtTimerSeg.value);
-    countdown = 45;
-    countdown = countdown - sc_timeInit[0];
+
+
     $controlLog.innerText = `Tiempo cambiado a ${sc_timeInit[0]}:${sc_timeInit[1]}`;
     timeChange()
 });
@@ -199,6 +223,7 @@ $btnSetTimer.addEventListener('click',()=>{
 $btnSetExtraTime.addEventListener('click',()=>{
     $boardExtraTime.innerText = "+ "+$txtExtraTime.value;
     $controlLog.innerText = `Tiempo extra: ${$txtExtraTime.value} min`;
+    showExtraTime();
 });
 
 /* Marcador */
@@ -211,25 +236,33 @@ $btnSetScore.addEventListener('click',()=>{
 $btnGoalLocal.addEventListener('click',()=>{
     sc_marcador[0]++;
     golEffect($scoreLocal);
-    $scoreLocal.innerText = sc_marcador[0];
+    setTimeout(()=>{
+        $scoreLocal.innerText = sc_marcador[0];
+    },250)
 });
 
 $btnGoalVisit.addEventListener('click',()=>{
     sc_marcador[1]++;
     golEffect($scoreVisit);
-    $scoreVisit.innerText = sc_marcador[1];
+    setTimeout(()=>{
+        $scoreVisit.innerText = sc_marcador[1];
+    },250)
 });
 
 $btnNoGoalLocal.addEventListener('click',()=>{
     sc_marcador[0]--;
     noGolEffect($scoreLocal);
-    $scoreLocal.innerText = sc_marcador[0];
+    setTimeout(()=>{
+        $scoreLocal.innerText = sc_marcador[0];
+    },250)
 });
 
 $btnNoGoalVisit.addEventListener('click',()=>{
     sc_marcador[1]--;
     noGolEffect($scoreVisit);
-    $scoreVisit.innerText = sc_marcador[1];
+    setTimeout(()=>{
+        $scoreVisit.innerText = sc_marcador[1];
+    },250)
 });
 
 /* Equipos */
@@ -237,6 +270,7 @@ $btnNoGoalVisit.addEventListener('click',()=>{
 $btnSetNames.addEventListener('click',()=>{
     equipoChange($txtLocalName.value,$teamLocal);
     equipoChange($txtVisitName.value,$teamVisit);
+    $controlLog.innerText = $txtLocalName.value + " vs " + $txtVisitName.value;
 });
 
 $btnChangeLocal.addEventListener('click',()=>{
