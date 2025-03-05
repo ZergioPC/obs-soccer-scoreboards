@@ -1,5 +1,5 @@
 //MARK:VAR DOM
-import scoreScript from './js/marcador_01.js'
+import scoreScript from './js/marcador_02.js'
 
 /* Marcador */
 const $btnStart = document.getElementById('controlShow');

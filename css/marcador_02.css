@@ -1,0 +1,232 @@
+:root{
+    --color-black: #000000;
+    --color-red-light: #df9a9a;
+    --color-red-dark: #9e1a1a;
+    --color-whithe: #ffffff;
+}
+
+main{
+    display: flex;
+    padding: 50px 0;
+    justify-content: center;
+    border: solid 2px white;
+    box-sizing: border-box;
+    width: auto;
+    height: 280px;
+    margin-bottom: 5px  ;
+}
+
+/* - - - - MARCADOR - - - - */
+
+
+.scoreboard{
+    display: grid;
+    width: 300px;
+    grid-template: 24px 3fr / 1fr 1fr 70px;
+    transition-duration: 1000ms;
+    overflow: visible;
+}   
+
+
+/* TIEMPO */
+
+.scoreboard-time{
+    position: relative;
+    grid-column: 3/4;
+    grid-row: 1/2;
+    background-color: var(--color-black);
+}
+
+.scoreboard-time p {
+    display: inline-block;
+    margin: 0;
+}
+
+.scoreboard-time-counter , .scoreboard-time-extra{
+    position: absolute;
+}
+
+.scoreboard-time-counter{
+    z-index: 3;
+    width: 100%;
+    color: var(--color-whithe);
+    text-align: center;
+}
+
+.scoreboard-time-extra{
+    z-index: -1;
+    bottom: 0px;
+    width: 60px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    text-align: right;
+    color: var(--color-black);
+    background-color: var(--color-whithe);
+    transition-property: bottom;
+    transition-duration: 500ms;
+}
+
+.scoreboard-time-extra-on{
+    bottom: -24px;
+}
+
+/* NOMBRES EQUIPOS*/
+
+.scoreboard-team-local , .scoreboard-team-visit {
+    width: 100%;
+    color: var(--color-whithe);
+    background-color: var(--color-red-dark);  
+}
+
+.scoreboard-team-local > p , .scoreboard-team-visit > p {
+    display: inline-block;
+    margin: 0;
+}
+
+.scoreboard-team-local{
+    margin-left: auto;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    text-align: right;
+}
+
+.scoreboard-team-visit{
+    margin-right: auto;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    text-align: left;
+}
+
+#score-Local-num , #score-Visit-num{
+    padding: 0 5px;
+    height: 100%;
+    background-color: var(--color-whithe);
+    color: var(--color-red-dark);
+}
+
+#score-Local-name , #score-Visit-name{
+    padding: 0 10px;
+    font-weight: bolder;
+}
+
+
+/* CAMBIO DE JUGADOR */
+
+.scoreboard-chPlayer{
+    position: relative;
+    grid-row: 2/3;
+    grid-column: 1/4;
+}
+
+.scoreboard-chPlayer > p {
+    transition-duration: 500ms;
+}
+
+#score-playerTeam{
+    display: block;
+    width: 80px;
+    padding: 0 10px;
+    background-color: var(--color-black);
+    color: var(--color-whithe);
+}
+
+#score-playerOut, #score-playerIn{
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 200px;
+    padding: 0 10px;
+    background-color: var(--color-whithe);
+    color: var(--color-black)
+}
+
+#score-playerOut::before{
+    content: "⬇️ ";
+    filter: hue-rotate(160deg);
+}
+
+#score-playerIn::before{
+    content: "⬆️ ";
+}
+
+/* ANIMACIONES */
+
+.fx-barrido-v-full{
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.fx-barrido-v-empty{
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+.key-cube-up{
+    animation-name: cube-up;
+    animation-duration: 2000ms;
+}
+
+.key-cube-dw{
+    animation-name: cube-dw ;
+    animation-duration: 2000ms;
+}
+
+.chPlayer-in{
+    transform: translateY(35px);
+}
+
+.chPlayer-out{
+    transform: translateY(70px);
+}
+
+@keyframes cube-up {
+    0%{
+        color: var(--color-red-dark);
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    }
+    10%{
+        color: var(--color-whithe);
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    }
+    30%{
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        color: var(--color-whithe);
+    }
+    40%{
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+        color: var(--color-whithe);
+    }
+    60%{
+        color: var(--color-whithe);
+        clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+    }
+    100%{
+        clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+        color: var(--color-red-dark);
+    }
+}
+
+@keyframes cube-dw {
+    0%{
+        color: var(--color-red-dark);
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    }
+    10%{
+        color: var(--color-whithe);
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    }
+    30%{
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+        color: var(--color-whithe);
+    }
+    40%{
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        color: var(--color-whithe);
+    }
+    60%{
+        color: var(--color-whithe);
+        clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+    }
+    100%{
+        clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+        color: var(--color-red-dark);
+    }
+}
